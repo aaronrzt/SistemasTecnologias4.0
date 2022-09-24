@@ -10,4 +10,4 @@ A continuación se muestra un borrador de la interfaz. Si bien esta no cuenta co
 existan en la versión final, el script, en el estado de borrador, ya cuenta con la lógica necesaria para llevar
 a cabo su propósito: insertar cierto texto en un archivo seleccionado por el usuario.
 
-![First GUI Draft][https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/GUIDraft.png]
+![First GUI Draft](https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/GUIDraft.png)
