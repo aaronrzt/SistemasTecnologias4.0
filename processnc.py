@@ -53,10 +53,12 @@ while True:
 
                 if ncprogram[-3:]==".nc":
                     newfile = ncprogram.replace('.nc', '') + "DPRNT.nc"
+                    line_fnd = False
                     with open(ncprogram) as f_old, open(newfile, "w") as f_new:
                         for line in f_old:
                             f_new.write(line)
                             if 'identifier' in line:
+                                line_fnd = True
                                 if checkbox[0]:
                                     f_new.write("\n" + checkbox_txt[0] + "\n")
                                 if checkbox[1]:
@@ -64,8 +66,11 @@ while True:
                                 os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
                                 os.rename(newfile, ncprogram)
                                 sg.PopupNoTitlebar("Proceso completado con éxito.")
-                            else:
-                                print("No identifier found.")
+                        if not(line_fnd):
+                            os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
+                            os.rename(newfile, ncprogram)
+                            sg.Popup("No se encontró ningún '%', no habrá cambios en el programa.", title = "Alerta")  
+                            print("No identifier found.")
 
                 elif ncprogram[-4:] == ".txt":
                     newfile = ncprogram.replace('.txt', '') + "DPRNT.txt"
