@@ -1,19 +1,4 @@
 %
-
-(DPRNTer start)
-DPRNT[FECHA (AAMMDD): #3011]
-
-DPRNT[Cycle start timer: #3021]
-
-DPRNT[Override FEED HOLD control: #3004]
-
-DPRNT[Estimated Feedrate: #5081]
-
-DPRNT[Coolant level: #13013]
-
-DPRNT[Spindle RPM: #3027]
-(DPRNTer end)
-
 O2001
 N10 G99 G18
 N11 G21
