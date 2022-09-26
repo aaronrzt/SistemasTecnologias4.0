@@ -23,7 +23,7 @@ layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
           [sg.Checkbox('Checkbox 2', default = True, key = "-IN2-")],
           [sg.Text("")],
           [sg.Button("Procesar", tooltip = "Agregar instrucciones DPRNT al archivo .nc o .txt"),
-           sg.Text("                                                                          "), sg.Button("Cerrar")]
+           sg.Text("                                                                          "), sg.Button("Cerrar", tooltip = "Cierra el programa.")]
          ]
 
 #Insert GUI elements into window
