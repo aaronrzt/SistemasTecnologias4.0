@@ -12,7 +12,7 @@ Topango         LightGreen1     SystemDefault       LightGrey       BluePurple
 LightBrown5     LightGreen2     LightBlue5          Green           DarkRed
 DarkBlack
 """
-sg.theme("SystemDefault")
+sg.theme("Reddit")
 
 #Create GUI elements
 layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
