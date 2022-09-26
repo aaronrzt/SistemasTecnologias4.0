@@ -31,7 +31,7 @@ layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
 
 #Insert GUI elements into window
 window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (500, 650))
-
+completed = False
 while True:
     # Get variables from the GUI elements
     event, values = window.read()
@@ -40,6 +40,7 @@ while True:
         break
     # Process the file when the "Procesar" button is pressed only if it's the right format and at least 1 checkbox is marked.
     elif event == "Procesar":
+        event = ""
         # Store the file path
         ncprogram = values["-IN-"]
         # Store the checkboxes values
@@ -47,7 +48,7 @@ while True:
 
         # Array with text to be inserted into file for each checkbox
         # HAAS Macrovariables table: https://www.haascnc.com/service/online-operator-s-manuals/mill-operator-s-manual/mill---macros.html
-        checkbox_txt = ["DPRNT[Cycle start timer: #3021]", "DPRNT[Override FEED HOLD control: #3004]", "DPRNT[Estimated Feedrate: #5081]", "DPRNT[Coolant level: #13013]", "DPRNT[Spindle RPM: #3027]"]
+        checkbox_txt = ["DPRNT[Cycle start timer: #3021[60]]", "DPRNT[Override FEED HOLD control: #3004[60]]", "DPRNT[Estimated Feedrate: #5081[60]]", "DPRNT[Coolant level: #13013[60]]", "DPRNT[Spindle RPM: #3027[60]]"]
         # No file was selected
         if (ncprogram == ""):
             sg.Popup("Por favor, seleccione un archivo.", title = "Error")
@@ -78,11 +79,11 @@ while True:
                             f_new.write(line)
 
                             # Does the current line coincide with the trigger line?
-                            if '%' in line:
+                            if '%' in line and completed == False:
                                 # Trigger found!
                                 line_fnd = True
                                 # Insert the text for each marked checkbox
-                                f_new.write("\n(DPRNTer)")
+                                f_new.write("\n(DPRNTer start)")
                                 # Imprime fecha del proceso actual
                                 f_new.write("\nDPRNT[FECHA (AAMMDD): #3011]\n")
                                 if checkbox[0]:
@@ -95,11 +96,16 @@ while True:
                                     f_new.write("\n" + checkbox_txt[3] + "\n")
                                 if checkbox[4]:
                                     f_new.write("\n" + checkbox_txt[4] + "\n")
+                                f_new.write("(DPRNTer end)\n\n")
                                 # Rename the new file as the original file, add _prev to the original file's name
                                 os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
                                 os.rename(newfile, ncprogram)
+                                completed = True
                                 # Success PopUp
                                 sg.PopupNoTitlebar("Proceso completado con éxito.")
+                                
+                                
+                                
                         # No trigger line found within file.
                         if not(line_fnd):
                             # Rename the new file as the original file, add _prev to the original file's name
@@ -123,7 +129,7 @@ while True:
                             # Copy the original file's contents into the new file
                             f_new.write(line)
                             # Does the current line coincide with the trigger line?
-                            if 'identifier' in line:
+                            if '%' in line and completed == False:
                                 # Trigger found!
                                 line_fnd = True
                                 # Insert the text for each marked checkbox
@@ -140,14 +146,20 @@ while True:
                                 # Rename the new file as the original file, add _prev to the original file's name
                                 os.rename(ncprogram, ncprogram.replace('.txt', '') + "_prev.txt")
                                 os.rename(newfile, ncprogram)
+                                completed = True
 
                                 # Success PopUp
                                 sg.PopupNoTitlebar("Proceso completado con éxito.")
                         # No trigger line found within file.
                         if not(line_fnd):
-                            # Rename the new file as the original file, add _prev to the original file's name
-                            os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
-                            os.rename(newfile, ncprogram)
+                            if ncprogram[-3:]==".nc":
+                                # Rename the new file as the original file, add _prev to the original file's name
+                                os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
+                                os.rename(newfile, ncprogram)
+                            elif ncprogram[-4:] == ".txt":
+                                # Rename the new file as the original file, add _prev to the original file's name
+                                os.rename(ncprogram, ncprogram.replace('.txt', '') + "_prev.txt")
+                                os.rename(newfile, ncprogram)
                             # No joy PopUp
                             sg.Popup("No se encontró ningún '%', no habrá cambios en el programa.", title = "Alerta")  
                             print("No identifier found.")
