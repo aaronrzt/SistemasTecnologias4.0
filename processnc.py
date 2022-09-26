@@ -30,7 +30,7 @@ layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
          ]
 
 #Insert GUI elements into window
-window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (500, 650))
+window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (500, 300))
 completed = False
 while True:
     # Get variables from the GUI elements
