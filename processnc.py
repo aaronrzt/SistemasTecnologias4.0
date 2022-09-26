@@ -19,8 +19,11 @@ layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
           [sg.FileBrowse("Buscar...", key = "-IN-", tooltip = "Selecciona el archivo .nc o .txt a ser procesado."), sg.Text("")],
           [sg.Text("")],
           [sg.Text("Variables a leer con el DPRNT:", )],
-          [sg.Checkbox('Checkbox 1', default = True, key = "-IN1-")],
-          [sg.Checkbox('Checkbox 2', default = True, key = "-IN2-")],
+          [sg.Checkbox('Tiempo de ciclo', default = True, key = "-IN1-", tooltip = "Agrega la instrucción de imprimir tiempo de ciclo (#3021).")],
+          [sg.Checkbox('Override de FEED HOLD', default = True, key = "-IN2-", tooltip = "Agrega la instrucción de imprimir Override de FEED HOLD (#3004).")],
+          [sg.Checkbox('Feedrate Estimado', default = True, key = "-IN3-", tooltip = "Agrega la instrucción de imprimir Feedrate Estimado (#50801).")],
+          [sg.Checkbox('Nivel de enfriador', default = True, key = "-IN4-", tooltip = "Agrega la instrucción de imprimir nivel restante de enfriador (#13013).")],
+          [sg.Checkbox('RPMs del husillo', default = True, key = "-IN5-", tooltip = "Agrega la instrucción de imprimir RPMs del husillo (#3027).")],
           [sg.Text("")],
           [sg.Button("Procesar", tooltip = "Agregar instrucciones DPRNT al archivo .nc o .txt"),
            sg.Text("                                                                          "), sg.Button("Cerrar", tooltip = "Cierra el programa.")]
@@ -40,9 +43,11 @@ while True:
         # Store the file path
         ncprogram = values["-IN-"]
         # Store the checkboxes values
-        checkbox = [values["-IN1-"], values["-IN2-"]]
+        checkbox = [values["-IN1-"], values["-IN2-"], values["-IN3-"], values["-IN4-"], values["-IN5-"]]
+
         # Array with text to be inserted into file for each checkbox
-        checkbox_txt = ["Checkbox1 was enabled!", "Checkbox2 was enabled!"]
+        # HAAS Macrovariables table: https://www.haascnc.com/service/online-operator-s-manuals/mill-operator-s-manual/mill---macros.html
+        checkbox_txt = ["DPRNT[Cycle start timer: #3021]", "DPRNT[Override FEED HOLD control: #3004]", "DPRNT[Estimated Feedrate: #5081]", "DPRNT[Coolant level: #13013]", "DPRNT[Spindle RPM: #3027]"]
         # No file was selected
         if (ncprogram == ""):
             sg.Popup("Por favor, seleccione un archivo.", title = "Error")
@@ -73,14 +78,23 @@ while True:
                             f_new.write(line)
 
                             # Does the current line coincide with the trigger line?
-                            if 'identifier' in line:
+                            if '%' in line:
                                 # Trigger found!
                                 line_fnd = True
                                 # Insert the text for each marked checkbox
+                                f_new.write("\n(DPRNTer)")
+                                # Imprime fecha del proceso actual
+                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3011]\n")
                                 if checkbox[0]:
                                     f_new.write("\n" + checkbox_txt[0] + "\n")
                                 if checkbox[1]:
                                     f_new.write("\n" + checkbox_txt[1] + "\n")
+                                if checkbox[2]:
+                                    f_new.write("\n" + checkbox_txt[2] + "\n")
+                                if checkbox[3]:
+                                    f_new.write("\n" + checkbox_txt[3] + "\n")
+                                if checkbox[4]:
+                                    f_new.write("\n" + checkbox_txt[4] + "\n")
                                 # Rename the new file as the original file, add _prev to the original file's name
                                 os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
                                 os.rename(newfile, ncprogram)
@@ -117,9 +131,16 @@ while True:
                                     f_new.write("\n" + checkbox_txt[0] + "\n")
                                 if checkbox[1]:
                                     f_new.write("\n" + checkbox_txt[1] + "\n")
+                                if checkbox[2]:
+                                    f_new.write("\n" + checkbox_txt[2] + "\n")
+                                if checkbox[3]:
+                                    f_new.write("\n" + checkbox_txt[3] + "\n")
+                                if checkbox[4]:
+                                    f_new.write("\n" + checkbox_txt[4] + "\n")
                                 # Rename the new file as the original file, add _prev to the original file's name
                                 os.rename(ncprogram, ncprogram.replace('.txt', '') + "_prev.txt")
                                 os.rename(newfile, ncprogram)
+
                                 # Success PopUp
                                 sg.PopupNoTitlebar("Proceso completado con éxito.")
                         # No trigger line found within file.
