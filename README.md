@@ -1,23 +1,55 @@
+<a name = "readme-top"></a>
+
 # SistemasTecnologias4.0
 Repositorio de scripts desarrollados para la concentración de Sistemas y Tecnologías 4.0.
 
 ## ProcessNC.py
-Este script genera una GUI para que el usuario seleccione un archivo de texto .nc o .txt. El propósito final de este script es
-leer y modificar dicho archivo para agregar las instrucciones DPRNT necesarias para extraer información relevante de
+<p align = "center">
+![DPRNTer GUI v1][gui-v1-link]
+
+Este script genera una GUI para que el usuario seleccione un archivo de texto .nc o
+.txt. El propósito final de este script es leer y modificar dicho archivo para
+agregar las instrucciones DPRNT necesarias para extraer información relevante de
 controladores HAAS de nueva generación.
+</p>
+<p align = "">(<a href = "#readme-top">Regresar al inicio)</p>
 
-### Funcionamiento
-Al correr el script por medio de un ejecutable (processnc para Unix/processnc.exe para Windows), se abre una ventana con
-una interfaz gráfica. En esta, el usuario debe seleccionar un archivo .nc o .txt haciendo click en el botón 'Buscar',
-seleccionar las variables que busca que se extraigan del proceso de maquinado (todas están seleccionadas por default)
-y dar click en 'Procesar'. El programa leerá el archivo de entrada hasta que encuentre el primer '%', símbolo que indica
-el inicio del programa y que no se repite más que al final de este. Cuando encuentra dicho símbolo, escribe las
-instrucciones DPRNT que el usuario seleccionó antes de dar click en 'Procesar'. El programa genera dos cambios: crea una
-copia del archivo original (al cuál se le agregará el prefijo _prev) con motivos de respaldo y el archivo nuevo
-(el cual tomará el nombre del archivo original) con las instrucciones solicitadas.
+### Sobre el programa
+El programa es una parte de todo un proyecto de la concentración Sistemas y
+Tecnologías 4.0. El objetivo de este es extraer información de controladores HAAS de
+las máquinas presentes en la planta de Laser & Manufacturing, nuestro socio formador.
 
+### Herramientas
+* [![Python][python-badge]][python-link]
+* [![PySimpleGUI][pysimplegui-badge]][pysimplegui-link]
+
+### Setup
+Descarga en tu equipo la aplicación para [Windows (64-bt)][windows-app-link] o
+[Unix (64-bit)][unix-app-link]. Para ejecutarla, da doble click (Nota 1).
+
+### Instrucciones de uso
+1. Abre la app
+2. Selecciona el archivo a procesar (.nc o .txt) dando click en "Buscar".
+3. Selecciona las variables a extraer del proceso de maquinado marcando las casillas
+correspondientes (todas están habilitadas por default).
+4. Da clik en "Procesar"
+5. Repetir a partir del paso 2 por cada archivo que sea necesario procesar.
+
+
+### Notas
+1. Es posible que en sistemas Windows aparezca una advertencia de seguridad. Da click
+en Mostrar más->Correr de todas formas. El script es completamente seguro, pero en el
+momento de desarrollo no se cuenta con una certificación de seguridad. El script puede
+ser revisado en el repositorio.
+<!--
 #### Primer prototipo de la interfaz
-![First GUI Draft](https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/GUIDraft.png)
-
-#### Prototipo de la interfaz con instrucciones DPRNT reales
-![DPRNTer GUI v1](https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/GUIv1.png)
+![First GUI Draft][GUI-Draft_Link]
+-->
+[gui-draft-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/GUIDraft.png
+[gui-v1-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/GUIv1.png
+[python-link]: https://www.python.org/
+[python-badge]: https://img.shields.io/badge/python-v3.8-blue
+[pysimplegui-link]: https://www.pysimplegui.org/en/latest/
+[pysimplegui-badge]: https://img.shields.io/badge/PySimpleGUI-v4.60-blue
+[windows-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/processnc.exe
+[unix-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/processnc
