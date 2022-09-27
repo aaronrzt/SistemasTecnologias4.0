@@ -17,6 +17,7 @@ sg.theme("Reddit")
 #Create GUI elements
 layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
           [sg.FileBrowse("Buscar...", key = "-IN-", tooltip = "Selecciona el archivo .nc o .txt a ser procesado."), sg.Text("")],
+          [sg.Button("✓", tooltip = "Validar el archivo seleccionado.")],
           [sg.Text("")],
           [sg.Text("Variables a leer con el DPRNT:", )],
           [sg.Checkbox('Tiempo de ciclo', default = True, key = "-IN1-", tooltip = "Agrega la instrucción de imprimir tiempo de ciclo (#3021).")],
@@ -25,21 +26,35 @@ layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
           [sg.Checkbox('Nivel de enfriador', default = True, key = "-IN4-", tooltip = "Agrega la instrucción de imprimir nivel restante de enfriador (#13013).")],
           [sg.Checkbox('RPMs del husillo', default = True, key = "-IN5-", tooltip = "Agrega la instrucción de imprimir RPMs del husillo (#3027).")],
           [sg.Text("")],
-          [sg.Button("Procesar", tooltip = "Agregar instrucciones DPRNT al archivo .nc o .txt"),
-           sg.Text("                                                                          "), sg.Button("Cerrar", tooltip = "Cierra el programa.")]
+          [sg.Button("Procesar", tooltip = "Agregar instrucciones DPRNT al archivo .nc o .txt."),
+           sg.Text("                                                                                                                 "), sg.Button("Cerrar", tooltip = "Cierra el programa.")]
          ]
 
 #Insert GUI elements into window
-window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (500, 350))
+window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (650, 350))
 completed = False
+validated = False
 while True:
     # Get variables from the GUI elements
     event, values = window.read()
     # End the program if X or "Cerrar" button is pressed
     if (event == sg.WIN_CLOSED or event == "Cerrar"):
         break
+    elif event == "✓":
+        ncprogram = values["-IN-"]
+        if ncprogram != "":
+            if ncprogram[-3:]==".nc" or ncprogram[-4:]==".txt":
+                validated = True
+                sg.Popup("Archivo validado con éxito.", title = "Aviso")
+            else:
+                sg.Popup("Por favor, seleccione un archivo .nc o .txt.", title = "Error")
+        else:
+            sg.Popup("Por favor, seleccione un archivo.", title = "Error")
+    elif event == "Procesar" and validated == False:
+        event = ""
+        sg.Popup("Por favor, valida el archivo seleccionado.", title = "Error")
     # Process the file when the "Procesar" button is pressed only if it's the right format and at least 1 checkbox is marked.
-    elif event == "Procesar":
+    elif event == "Procesar" and validated == True:
         event = ""
         # Store the file path
         ncprogram = values["-IN-"]
@@ -101,8 +116,9 @@ while True:
                                 os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
                                 os.rename(newfile, ncprogram)
                                 completed = True
+                                validated = False
                                 # Success PopUp
-                                sg.PopupNoTitlebar("Proceso completado con éxito.")
+                                sg.Popup("Programa completado con éxito.", title = "Aviso") 
                                 
                                 
                                 
@@ -116,7 +132,7 @@ while True:
                             print("No identifier found.")
 
                 # Or is it a .txt?
-                elif ncprogram[-4:] == ".txt":
+                elif ncprogram[-4:] == ".txt" and validated == True:
                     # Create aux file to be used while going through original file
                     # fileDPRNT.txt
                     newfile = ncprogram.replace('.txt', '') + "DPRNT.txt"
@@ -147,9 +163,10 @@ while True:
                                 os.rename(ncprogram, ncprogram.replace('.txt', '') + "_prev.txt")
                                 os.rename(newfile, ncprogram)
                                 completed = True
+                                validated = False
 
                                 # Success PopUp
-                                sg.PopupNoTitlebar("Proceso completado con éxito.")
+                                sg.Popup("Programa completado con éxito.", title = "Aviso") 
                         # No trigger line found within file.
                         if not(line_fnd):
                             if ncprogram[-3:]==".nc":
