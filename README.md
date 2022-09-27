@@ -1,6 +1,9 @@
 <a name = "readme-top"></a>
 
 # Sistemas y Tecnologias 4.0
+
+![Project Info. Cycle][project-pic]
+
 Repositorio de scripts desarrollados para la concentración de Sistemas y Tecnologías 4.0. En este proyecto se pretende
 desarrollar un prototipo de sistema de Industria 4.0 para
 optimizar los procesos de manufactura de nuestro socio
@@ -37,3 +40,4 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 [pysimplegui-link]: https://www.pysimplegui.org/en/latest/
 [pysimplegui-badge]: https://img.shields.io/badge/PySimpleGUI-v4.60-blue
 [laser-link]: https://www.lasermanufactura.com/
+[project-pic]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/InfoCycle.png
