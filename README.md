@@ -5,14 +5,20 @@ Repositorio de scripts desarrollados para la concentración de Sistemas y Tecnol
 
 ## ProcessNC.py
 <p align = "center">
+
 ![DPRNTer GUI v1][gui-v1-link]
+
+</p>
+
+<p align = "center">
 
 Este script genera una GUI para que el usuario seleccione un archivo de texto .nc o
 .txt. El propósito final de este script es leer y modificar dicho archivo para
 agregar las instrucciones DPRNT necesarias para extraer información relevante de
 controladores HAAS de nueva generación.
+
 </p>
-<p align = "">(<a href = "#readme-top">Regresar al inicio)</p>
+
 
 ### Sobre el programa
 El programa es una parte de todo un proyecto de la concentración Sistemas y
@@ -41,6 +47,9 @@ correspondientes (todas están habilitadas por default).
 en Mostrar más->Correr de todas formas. El script es completamente seguro, pero en el
 momento de desarrollo no se cuenta con una certificación de seguridad. El script puede
 ser revisado en el repositorio.
+
+<p align = "">(<a href = "#readme-top">Regresar al inicio)</p>
+
 <!--
 #### Primer prototipo de la interfaz
 ![First GUI Draft][GUI-Draft_Link]
