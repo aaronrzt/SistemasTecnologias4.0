@@ -3,15 +3,15 @@
 (DPRNTer start)
 DPRNT[FECHA (AAMMDD): #3011]
 
-DPRNT[Cycle start timer: #3021]
+DPRNT[Cycle start timer: #3021[60]]
 
-DPRNT[Override FEED HOLD control: #3004]
+DPRNT[Override FEED HOLD control: #3004[60]]
 
-DPRNT[Estimated Feedrate: #5081]
+DPRNT[Estimated Feedrate: #5081[60]]
 
-DPRNT[Coolant level: #13013]
+DPRNT[Coolant level: #13013[60]]
 
-DPRNT[Spindle RPM: #3027]
+DPRNT[Spindle RPM: #3027[60]]
 (DPRNTer end)
 
 O2001
