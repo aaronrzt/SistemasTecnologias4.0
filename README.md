@@ -20,4 +20,4 @@ copia del archivo original (al cuál se le agregará el prefijo _prev) con motiv
 ![First GUI Draft](https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/GUIDraft.png)
 
 #### Prototipo de la interfaz con instrucciones DPRNT reales
-![DPRNTer GUI v1]()
+![DPRNTer GUI v1](https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/GUIv1.png)
