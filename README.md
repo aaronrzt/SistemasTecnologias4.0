@@ -1,7 +1,19 @@
 <a name = "readme-top"></a>
 
-# SistemasTecnologias4.0
-Repositorio de scripts desarrollados para la concentración de Sistemas y Tecnologías 4.0.
+# Sistemas y Tecnologias 4.0
+Repositorio de scripts desarrollados para la concentración de Sistemas y Tecnologías 4.0. En este proyecto se pretende
+desarrollar un prototipo de sistema de Industria 4.0 para
+optimizar los procesos de manufactura de nuestro socio
+formador, [Laser & Manufacturing.][laser-link].
+Se han proyectado dos componentes principales para este
+prototipo:
+* Sistema embebido: Sistema que integra diferentes tipos
+de sensores para recabar datos de la máquina CNC y
+mandarlos por medio del protocolo MQTT a una Raspberry Pi.
+* Raspberry Pi: Mini-computadora que recibe datos tanto
+de los sensores externos (con MQTT) como del controlador
+de la máquina (obtenidos con instrucciones DPRNT), ya sea
+por USB o de forma inalámbrica.
 
 ## ProcessNC.py
 <p align = "center">
@@ -12,10 +24,12 @@ Repositorio de scripts desarrollados para la concentración de Sistemas y Tecnol
 
 <p align = "center">
 
-Este script genera una GUI para que el usuario seleccione un archivo de texto .nc o
-.txt. El propósito final de este script es leer y modificar dicho archivo para
-agregar las instrucciones DPRNT necesarias para extraer información relevante de
-controladores HAAS de nueva generación.
+Este script genera una GUI para que el usuario seleccione
+un archivo de texto .nc o .txt. El propósito final de
+este script es leer y modificar dicho archivo para
+agregar las instrucciones DPRNT necesarias y así extraer
+información relevante de controladores HAAS de
+nueva generación.
 
 </p>
 
@@ -62,3 +76,4 @@ ser revisado en el repositorio.
 [pysimplegui-badge]: https://img.shields.io/badge/PySimpleGUI-v4.60-blue
 [windows-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/processnc.exe
 [unix-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/processnc
+[laser-link]: https://www.lasermanufactura.com/
