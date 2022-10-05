@@ -63,7 +63,7 @@ while True:
 
         # Array with text to be inserted into file for each checkbox
         # HAAS Macrovariables table: https://www.haascnc.com/service/online-operator-s-manuals/mill-operator-s-manual/mill---macros.html
-        checkbox_txt = ["DPRNT[Cycle start timer: #3021[60]]", "DPRNT[Override FEED HOLD control: #3004[60]]", "DPRNT[Estimated Feedrate: #5081[60]]", "DPRNT[Coolant level: #13013[60]]", "DPRNT[Spindle RPM: #3027[60]]"]
+        checkbox_txt = ["DPRNT[CYCLE START TIMER: #3021[60]]", "DPRNT[OVERRIDE FEED HOLD CONTROL: #3004[60]]", "DPRNT[ESTIMATED FEEDRATE: #5081[60]]", "DPRNT[COOLANT LEVEL: #13013[60]]", "DPRNT[SPINDLE RPM: #3027[60]]"]
         # No file was selected
         if (ncprogram == ""):
             sg.Popup("Por favor, seleccione un archivo.", title = "Error")
