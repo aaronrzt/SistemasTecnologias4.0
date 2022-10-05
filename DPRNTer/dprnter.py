@@ -123,4 +123,5 @@ while True:
                         os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.txt")
                         os.rename(newfile, ncprogram)
                         sg.Popup("Programa completado con éxito.", title = "Aviso") 
-            sg.Popup("Por favor, seleccione un archivo .nc o .txt.", title = "Error") 
+            else:
+                sg.Popup("Por favor, seleccione un archivo .nc o .txt.", title = "Error") 
