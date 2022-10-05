@@ -23,7 +23,7 @@ layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
          ]
 
 #Insert GUI elements into window
-window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (650, 130))
+window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (650, 150))
 
 while True:
     # Get variables from the GUI elements
@@ -123,5 +123,8 @@ while True:
                         os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.txt")
                         os.rename(newfile, ncprogram)
                         sg.Popup("Programa completado con éxito.", title = "Aviso") 
+
+# ------------------------WORK WITH SOMETHING OTHER THAN A .NC OR .TXT  FILE-----------------
+
             else:
                 sg.Popup("Por favor, seleccione un archivo .nc o .txt.", title = "Error") 
