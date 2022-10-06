@@ -59,6 +59,7 @@ while True:
 # --------------------------------WORK WITH NC FILE------------------------------------------
               
                 if ncprogram[-3:]==".nc":
+                    checked_prcnt = False
                     # Create aux file to be used while going through original file
                     # fileDPRNT.nc
                     newfile = ncprogram.replace('.nc', '') + "DPRNT.nc"
@@ -69,7 +70,7 @@ while True:
                             # Copy the original file's contents into the new file
                             f_new.write(line)
                             # Program start
-                            if '%' in line:
+                            if '%' in line and checked_prcnt == False:
                                 # Insert the text for each marked checkbox
                                 # Imprime fecha del proceso actual
                                 f_new.write("\nDPRNT[FECHA (AAMMDD): #3011]\n")
@@ -80,6 +81,7 @@ while True:
                                 #if checkbox[1]:
                                 #    f_new.write("\n" + checkbox_txt[1] + "\n")
                                 found_cnt += 1
+                                checked_prcnt = True
                             # Tool change
                             elif 'M6' in line:
                                 tool_no = line[-5:-4]
@@ -87,6 +89,18 @@ while True:
                                 f_new.write("\n" + checkbox_txt[0] + "\n")
                                 f_new.write("\nDPRNT[CURRENT TOOL: " + tool_no + "]\n")
                                 f_new.write("\n" + checkbox_txt[1] + "\n")
+                                found_cnt += 1
+                            # End of program
+                            elif 'M30' in line:
+                                # Insert the text for each marked checkbox
+                                # Imprime fecha del proceso actual
+                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3011]\n")
+                                # Imprime hora del proceso actual
+                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3021]\n")
+                                # Imprime nivel de enfriador actual
+                                f_new.write("\n" + checkbox_txt[2] + "\n")
+                                #if checkbox[1]:
+                                #    f_new.write("\n" + checkbox_txt[1] + "\n")
                                 found_cnt += 1
                             line_cnt += 1
                         # Rename the new file as the original file, add _prev to the original file's name
