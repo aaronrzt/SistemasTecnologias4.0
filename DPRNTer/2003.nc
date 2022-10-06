@@ -1,19 +1,4 @@
 %
-
-(DPRNTer start)
-DPRNT[FECHA (AAMMDD): #3011]
-
-DPRNT[Cycle start timer: #3021[60]]
-
-DPRNT[Override FEED HOLD control: #3004[60]]
-
-DPRNT[Estimated Feedrate: #5081[60]]
-
-DPRNT[Coolant level: #13013[60]]
-
-DPRNT[Spindle RPM: #3027[60]]
-(DPRNTer end)
-
 O02003
 (Using high feed G1 F650. instead of G0.)
 (T1 D=12.7 CR=0. - ZMIN=-20.5 - flat end mill)
