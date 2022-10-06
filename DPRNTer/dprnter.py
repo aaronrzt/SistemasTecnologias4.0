@@ -46,7 +46,7 @@ while True:
         #checkbox = [values["-IN0-"], values["-IN1-"], values["-IN2-"]]
         # Array with text to be inserted into file for each checkbox
         # HAAS Macrovariables table: https://www.haascnc.com/service/online-operator-s-manuals/mill-operator-s-manual/mill---macros.html
-        checkbox_txt = ["DPRNT[TIME: #3021[60]]", "DPRNT[ESTIMATED FEEDRATE: #5081[60]]", "DPRNT[COOLANT LEVEL: #13013[60]]"]
+        checkbox_txt = ["DPRNT[HORA*(HHMMSS):*#3021[60]]", "DPRNT[ESTIMATED*FEEDRATE:*#5081[60]]", "DPRNT[COOLANT*LEVEL:*#13013[60]]"]
         # No file was selected
         if (ncprogram == ""):
             sg.Popup("Por favor, seleccione un archivo.", title = "Error")
@@ -73,9 +73,9 @@ while True:
                             if '%' in line and checked_prcnt == False:
                                 # Insert the text for each marked checkbox
                                 # Imprime fecha del proceso actual
-                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3011]\n")
+                                f_new.write("\nDPRNT[FECHA*(AAMMDD):*#3011]\n")
                                 # Imprime hora del proceso actual
-                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3021]\n")
+                                f_new.write("\nDPRNT[HORA*(HHMMSS):*#3021]\n")
                                 # Imprime nivel de enfriador actual
                                 f_new.write("\n" + checkbox_txt[2] + "\n")
                                 #if checkbox[1]:
@@ -87,16 +87,16 @@ while True:
                                 tool_no = line[-5:-4]
                                 print("\nTool number detected: " + tool_no)
                                 f_new.write("\n" + checkbox_txt[0] + "\n")
-                                f_new.write("\nDPRNT[CURRENT TOOL: " + tool_no + "]\n")
+                                f_new.write("\nDPRNT[CURRENT*TOOL:*" + tool_no + "]\n")
                                 f_new.write("\n" + checkbox_txt[1] + "\n")
                                 found_cnt += 1
                             # End of program
                             elif 'M30' in line:
                                 # Insert the text for each marked checkbox
                                 # Imprime fecha del proceso actual
-                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3011]\n")
+                                f_new.write("\nDPRNT[FECHA*(AAMMDD):*#3011]\n")
                                 # Imprime hora del proceso actual
-                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3021]\n")
+                                f_new.write("\nDPRNT[HORA*(HHMMSS):*#3021]\n")
                                 # Imprime nivel de enfriador actual
                                 f_new.write("\n" + checkbox_txt[2] + "\n")
                                 #if checkbox[1]:
@@ -122,24 +122,37 @@ while True:
                             # Copy the original file's contents into the new file
                             f_new.write(line)
                             # Program start
-                            if '%' in line:
+                            if '%' in line and checked_prcnt == False:
                                 # Insert the text for each marked checkbox
                                 # Imprime fecha del proceso actual
-                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3011]\n")
+                                f_new.write("\nDPRNT[FECHA*(AAMMDD):*#3011]\n")
                                 # Imprime hora del proceso actual
-                                f_new.write("\nDPRNT[FECHA (AAMMDD): #3021]\n")
+                                f_new.write("\nDPRNT[HORA*(HHMMSS):*#3021]\n")
                                 # Imprime nivel de enfriador actual
                                 f_new.write("\n" + checkbox_txt[2] + "\n")
                                 #if checkbox[1]:
                                 #    f_new.write("\n" + checkbox_txt[1] + "\n")
                                 found_cnt += 1
+                                checked_prcnt = True
                             # Tool change
                             elif 'M6' in line:
                                 tool_no = line[-5:-4]
                                 print("\nTool number detected: " + tool_no)
                                 f_new.write("\n" + checkbox_txt[0] + "\n")
-                                f_new.write("\nDPRNT[CURRENT TOOL: " + tool_no + "]\n")
+                                f_new.write("\nDPRNT[CURRENT*TOOL:*" + tool_no + "]\n")
                                 f_new.write("\n" + checkbox_txt[1] + "\n")
+                                found_cnt += 1
+                            # End of program
+                            elif 'M30' in line:
+                                # Insert the text for each marked checkbox
+                                # Imprime fecha del proceso actual
+                                f_new.write("\nDPRNT[FECHA*(AAMMDD):*#3011]\n")
+                                # Imprime hora del proceso actual
+                                f_new.write("\nDPRNT[HORA*(HHMMSS):*#3021]\n")
+                                # Imprime nivel de enfriador actual
+                                f_new.write("\n" + checkbox_txt[2] + "\n")
+                                #if checkbox[1]:
+                                #    f_new.write("\n" + checkbox_txt[1] + "\n")
                                 found_cnt += 1
                             line_cnt += 1
                         # Rename the new file as the original file, add _prev to the original file's name
