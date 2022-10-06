@@ -3,6 +3,14 @@ import PySimpleGUI as sg
 import os
 
 """
+TO DO:
+- If the machine stops reading the .nc program at the last %, make the last DPRNT be inserted after M30.
+-- If the above is true, add a flag that turns on after adding the first % DPRNT so that it isn't added again.
+-- Turn the flag back off after renaming the files.
+"""
+
+
+"""
 Select the GUI theme:
 LightYellow     Reddit          LightGreen3         LightBrown      Dark
 DarkBlue15      Black           LightGreen4         DarkPurple      BrownBlue
@@ -84,6 +92,7 @@ while True:
                         # Rename the new file as the original file, add _prev to the original file's name
                         os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
                         os.rename(newfile, ncprogram)
+                        print("\nLine count: " + str(line_cnt))
                         sg.Popup("Programa completado con éxito.", title = "Aviso") 
 
 # --------------------------------WORK WITH TXT FILE-----------------------------------------
