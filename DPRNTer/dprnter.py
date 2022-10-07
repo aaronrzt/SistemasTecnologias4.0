@@ -79,122 +79,70 @@ while True:
         else:
             # Is file .nc or .txt?
             if ncprogram[-3:]==".nc" or ncprogram[-4:]==".txt":
+
                 line_cnt = 0
-                
                 found_cnt = 0
+                checked_prcnt = False
 
-# --------------------------------WORK WITH NC FILE------------------------------------------
+# ---------------------------------WORK WITH FILE--------------------------------------------
               
+                # Create aux file to be used while going through original file
                 if ncprogram[-3:]==".nc":
-                    checked_prcnt = False
-
-                    # Create aux file to be used while going through original file
                     newfile = ncprogram.replace('.nc', '') + "DPRNT.nc"
-
-                    # Open original and aux file
-                    with open(ncprogram) as f_old, open(newfile, "w") as f_new:
-                        # Go through every line within the original file
-                        for line in f_old:
-
-                            # Copy the original file's contents into the new file
-                            f_new.write(line)
-
-                            # Program start
-                            if '%' in line and checked_prcnt == False:
-                                # Print current date
-                                f_new.write(dprnt["date"])
-                                # Print current time
-                                f_new.write(dprnt["time"])
-                                # Print current coolant level
-                                f_new.write(dprnt["coolant"])
-                                found_cnt += 1
-                                checked_prcnt = True
-
-                            # Tool change
-                            elif 'T' in line and 'M6' not in line and '(' not in line:
-                                # Print current time
-                                f_new.write(dprnt["time"])
-                                # Print current tool number
-                                f_new.write(dprnt_tool(line))
-                                # Print current feedrate
-                                f_new.write(dprnt["feedrate"])
-                                found_cnt += 1
-
-                            # End of program
-                            elif 'M30' in line:
-                                # Print current date
-                                f_new.write(dprnt["date"])
-                                # Print current time
-                                f_new.write(dprnt["time"])
-                                # Print current coolant level
-                                f_new.write(dprnt["coolant"])
-                                # Print current feedrate
-                                f_new.write(dprnt["feedrate"])
-                                found_cnt += 1
-
-                            line_cnt += 1
-
-                        # Rename the new file as the original file, add _prev to the original file's name
-                        os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
-                        os.rename(newfile, ncprogram)
-                        print("\nLine count: " + str(line_cnt))
-                        sg.Popup("Programa completado con éxito.", title = "Aviso") 
-
-# --------------------------------WORK WITH TXT FILE-----------------------------------------
-
                 else:
-                    checked_prcnt = False
-
-                    # Create aux file to be used while going through original file
                     newfile = ncprogram.replace('.txt', '') + "DPRNT.txt"
 
-                    # Open original and aux file
-                    with open(ncprogram) as f_old, open(newfile, "w") as f_new:
-                        # Go through every line within the original file
-                        for line in f_old:
+                # Open original and aux file
+                with open(ncprogram) as f_old, open(newfile, "w") as f_new:
+                    # Go through every line within the original file
+                    for line in f_old:
 
-                            # Copy the original file's contents into the new file
-                            f_new.write(line)
+                        # Copy the original file's contents into the new file
+                        f_new.write(line)
 
-                            # Program start
-                            if '%' in line and checked_prcnt == False:
-                                # Print current date
-                                f_new.write(dprnt["date"])
-                                # Print current time
-                                f_new.write(dprnt["time"])
-                                # Print current coolant level
-                                f_new.write(dprnt["coolant"])
-                                found_cnt += 1
-                                checked_prcnt = True
+                        # Program start
+                        if '%' in line and checked_prcnt == False:
+                            # Print current date
+                            f_new.write(dprnt["date"])
+                            # Print current time
+                            f_new.write(dprnt["time"])
+                            # Print current coolant level
+                            f_new.write(dprnt["coolant"])
+                            found_cnt += 1
+                            checked_prcnt = True
 
-                            # Tool change
-                            elif 'T' in line and 'M6' not in line:
-                                # Print current time
-                                f_new.write(dprnt["time"])
-                                # Print current tool number
-                                f_new.write(dprnt_tool(line))
-                                # Print current feedrate
-                                f_new.write(dprnt["feedrate"])
-                                found_cnt += 1
+                        # Tool change
+                        elif 'T' in line and 'M6' not in line and '(' not in line:
+                            # Print current time
+                            f_new.write(dprnt["time"])
+                            # Print current tool number
+                            f_new.write(dprnt_tool(line))
+                            # Print current feedrate
+                            f_new.write(dprnt["feedrate"])
+                            found_cnt += 1
 
-                            # End of program
-                            elif 'M30' in line:
-                                # Print current date
-                                f_new.write(dprnt["date"])
-                                # Print current time
-                                f_new.write(dprnt["time"])
-                                # Print current coolant level
-                                f_new.write(dprnt["coolant"])
-                                # Print current feedrate
-                                f_new.write(dprnt["feedrate"])
-                                found_cnt += 1
+                        # End of program
+                        elif 'M30' in line:
+                            # Print current date
+                            f_new.write(dprnt["date"])
+                            # Print current time
+                            f_new.write(dprnt["time"])
+                            # Print current coolant level
+                            f_new.write(dprnt["coolant"])
+                            # Print current feedrate
+                            f_new.write(dprnt["feedrate"])
+                            found_cnt += 1
 
-                            line_cnt += 1
+                        line_cnt += 1
 
-                        # Rename the new file as the original file, add _prev to the original file's name
-                        os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.txt")
-                        os.rename(newfile, ncprogram)
-                        sg.Popup("Programa completado con éxito.", title = "Aviso") 
+                    # Rename the new file as the original file, add _prev to the original file's name
+                    if ncprogram[-3:]==".nc":
+                        os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
+                    else:
+                        os.rename(ncprogram, ncprogram.replace('.txt', '') + "_prev.txt")
+                    os.rename(newfile, ncprogram)
+                    print("\nOriginal file line count: " + str(line_cnt))
+                    sg.Popup("Programa completado con éxito.", title = "Aviso") 
 
 # ------------------------WORK WITH SOMETHING OTHER THAN A .NC OR .TXT  FILE-----------------
 
