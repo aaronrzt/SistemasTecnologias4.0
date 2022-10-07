@@ -38,10 +38,10 @@ window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (650, 150)
 
 # Dictionary that stores the text to be used in each DPRNT statement.
 dprnt = {
-            "date":    "\nDPRNT[DATE*(AAMMDD):*#3011]\n",
-            "time":     "\nDPRNT[TIME*(HHMMSS):*#3021[60]]\n",
-            "feedrate": "\nDPRNT[ESTIMATED*FEEDRATE:*#5081[60]]\n",
-            "coolant": "\nDPRNT[COOLANT*LEVEL:*#13013[60]]\n"
+            "date":    "DPRNT[DATE*(AAMMDD):*#3011]\n",
+            "time":     "DPRNT[TIME*(HHMMSS):*#3021[60]]\n",
+            "feedrate": "DPRNT[ESTIMATED*FEEDRATE:*#5081[60]]\n",
+            "coolant": "DPRNT[COOLANT*LEVEL:*#13013[60]]\n"
         }
         
 # Find current tool number
@@ -54,8 +54,8 @@ def dprnt_tool(line):
     print("\nTool number detected: " + tool_no)
 
     # Get the text to be inserted into the .nc file.
-    tool_text = "\nDPRNT[CURRENT*TOOL:*" + tool_no + "]\n"
-
+    aux_tool_text = "\nDPRNT[CURRENT*TOOL:*" + str(tool_no) + "]"
+    tool_text = ''.join(aux_tool_text.splitlines())
     return tool_text
     
 
@@ -116,7 +116,7 @@ while True:
                             # Print current time
                             f_new.write(dprnt["time"])
                             # Print current tool number
-                            f_new.write(dprnt_tool(line))
+                            f_new.write(dprnt_tool(line) + "\n")
                             # Print current feedrate
                             f_new.write(dprnt["feedrate"])
                             found_cnt += 1
