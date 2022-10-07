@@ -137,8 +137,10 @@ while True:
                                 found_cnt += 1
                                 checked_prcnt = True
                             # Tool change
-                            elif 'M6' in line:
-                                tool_no = line[-5:-4]
+                            elif 'T' in line and 'M6' not in line:
+                                tool_i = line.find("T")
+                                print("T index: " + str(tool_i))
+                                tool_no = line[-tool_i + 1:]
                                 print("\nTool number detected: " + tool_no)
                                 f_new.write("\n" + checkbox_txt[0] + "\n")
                                 f_new.write("\nDPRNT[CURRENT*TOOL:*" + tool_no + "]\n")
