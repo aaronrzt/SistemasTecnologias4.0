@@ -1,4 +1,5 @@
 #Import necessary libraries
+from json import tool
 import PySimpleGUI as sg
 import os
 
@@ -33,6 +34,29 @@ layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
 #Insert GUI elements into window
 window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (650, 150))
 
+# Dictionary that stores the text to be used in each DPRNT statement.
+dprnt = {
+            "date":    "\nDPRNT[DATE*(AAMMDD):*#3011]\n",
+            "time":     "\nDPRNT[TIME*(HHMMSS):*#3021[60]]\n",
+            "feedrate": "\nDPRNT[ESTIMATED*FEEDRATE:*#5081[60]]\n",
+            "coolant": "\nDPRNT[COOLANT*LEVEL:*#13013[60]]\n"
+        }
+        
+# Find current tool number
+def dprnt_tool(line):
+    # Find 'T' index within line
+    tool_i = line.find("T") + 1
+    
+    # Get tool number (Any number after the T all the way to the end of line)
+    tool_no = line[tool_i:]
+    print("\nTool number detected: " + tool_no)
+
+    # Get the text to be inserted into the .nc file.
+    tool_text = "\nDPRNT[CURRENT*TOOL:*" + tool_no + "]\n"
+
+    return tool_text
+    
+
 while True:
     # Get variables from the GUI elements
     event, values = window.read()
@@ -42,9 +66,6 @@ while True:
         event = ""
         # Store the file path
         ncprogram = values["-IN-"]
-        # Store the checkboxes values
-        #checkbox = [values["-IN0-"], values["-IN1-"], values["-IN2-"]]
-        # Array with text to be inserted into file for each checkbox
         # HAAS Macrovariables table: https://www.haascnc.com/service/online-operator-s-manuals/mill-operator-s-manual/mill---macros.html
         checkbox_txt = ["DPRNT[HORA*(HHMMSS):*#3021[60]]", "DPRNT[ESTIMATED*FEEDRATE:*#5081[60]]", "DPRNT[COOLANT*LEVEL:*#13013[60]]"]
         # No file was selected
@@ -60,51 +81,53 @@ while True:
               
                 if ncprogram[-3:]==".nc":
                     checked_prcnt = False
+
                     # Create aux file to be used while going through original file
-                    # fileDPRNT.nc
                     newfile = ncprogram.replace('.nc', '') + "DPRNT.nc"
+
                     # Open original and aux file
                     with open(ncprogram) as f_old, open(newfile, "w") as f_new:
                         # Go through every line within the original file
                         for line in f_old:
+
                             # Copy the original file's contents into the new file
                             f_new.write(line)
+
                             # Program start
                             if '%' in line and checked_prcnt == False:
-                                # Insert the text for each marked checkbox
-                                # Imprime fecha del proceso actual
-                                f_new.write("\nDPRNT[FECHA*(AAMMDD):*#3011]\n")
-                                # Imprime hora del proceso actual
-                                f_new.write("\nDPRNT[HORA*(HHMMSS):*#3021]\n")
-                                # Imprime nivel de enfriador actual
-                                f_new.write("\n" + checkbox_txt[2] + "\n")
-                                #if checkbox[1]:
-                                #    f_new.write("\n" + checkbox_txt[1] + "\n")
+                                # Print current date
+                                f_new.write(dprnt["date"])
+                                # Print current time
+                                f_new.write(dprnt["time"])
+                                # Print current coolant level
+                                f_new.write(dprnt["coolant"])
                                 found_cnt += 1
                                 checked_prcnt = True
+
                             # Tool change
-                            elif 'T' in line and 'M6' not in line:
-                                tool_i = line.find("T")
-                                print("T index: " + str(tool_i))
-                                tool_no = line[-tool_i + 1:]
-                                print("\nTool number detected: " + tool_no)
-                                f_new.write("\n" + checkbox_txt[0] + "\n")
-                                f_new.write("\nDPRNT[CURRENT*TOOL:*" + tool_no + "]\n")
-                                f_new.write("\n" + checkbox_txt[1] + "\n")
+                            elif 'T' in line and 'M6' not in line and '(' not in line:
+                                # Print current time
+                                f_new.write(dprnt["time"])
+                                # Print current tool number
+                                f_new.write(dprnt_tool(line))
+                                # Print current feedrate
+                                f_new.write(dprnt["feedrate"])
                                 found_cnt += 1
+
                             # End of program
                             elif 'M30' in line:
-                                # Insert the text for each marked checkbox
-                                # Imprime fecha del proceso actual
-                                f_new.write("\nDPRNT[FECHA*(AAMMDD):*#3011]\n")
-                                # Imprime hora del proceso actual
-                                f_new.write("\nDPRNT[HORA*(HHMMSS):*#3021]\n")
-                                # Imprime nivel de enfriador actual
-                                f_new.write("\n" + checkbox_txt[2] + "\n")
-                                #if checkbox[1]:
-                                #    f_new.write("\n" + checkbox_txt[1] + "\n")
+                                # Print current date
+                                f_new.write(dprnt["date"])
+                                # Print current time
+                                f_new.write(dprnt["time"])
+                                # Print current coolant level
+                                f_new.write(dprnt["coolant"])
+                                # Print current feedrate
+                                f_new.write(dprnt["feedrate"])
                                 found_cnt += 1
+
                             line_cnt += 1
+
                         # Rename the new file as the original file, add _prev to the original file's name
                         os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
                         os.rename(newfile, ncprogram)
@@ -114,51 +137,54 @@ while True:
 # --------------------------------WORK WITH TXT FILE-----------------------------------------
 
                 else:
+                    checked_prcnt = False
+
                     # Create aux file to be used while going through original file
-                    # fileDPRNT.txt
                     newfile = ncprogram.replace('.txt', '') + "DPRNT.txt"
+
                     # Open original and aux file
                     with open(ncprogram) as f_old, open(newfile, "w") as f_new:
                         # Go through every line within the original file
                         for line in f_old:
+
                             # Copy the original file's contents into the new file
                             f_new.write(line)
+
                             # Program start
                             if '%' in line and checked_prcnt == False:
-                                # Insert the text for each marked checkbox
-                                # Imprime fecha del proceso actual
-                                f_new.write("\nDPRNT[FECHA*(AAMMDD):*#3011]\n")
-                                # Imprime hora del proceso actual
-                                f_new.write("\nDPRNT[HORA*(HHMMSS):*#3021]\n")
-                                # Imprime nivel de enfriador actual
-                                f_new.write("\n" + checkbox_txt[2] + "\n")
-                                #if checkbox[1]:
-                                #    f_new.write("\n" + checkbox_txt[1] + "\n")
+                                # Print current date
+                                f_new.write(dprnt["date"])
+                                # Print current time
+                                f_new.write(dprnt["time"])
+                                # Print current coolant level
+                                f_new.write(dprnt["coolant"])
                                 found_cnt += 1
                                 checked_prcnt = True
+
                             # Tool change
                             elif 'T' in line and 'M6' not in line:
-                                tool_i = line.find("T")
-                                print("T index: " + str(tool_i))
-                                tool_no = line[-tool_i + 1:]
-                                print("\nTool number detected: " + tool_no)
-                                f_new.write("\n" + checkbox_txt[0] + "\n")
-                                f_new.write("\nDPRNT[CURRENT*TOOL:*" + tool_no + "]\n")
-                                f_new.write("\n" + checkbox_txt[1] + "\n")
+                                # Print current time
+                                f_new.write(dprnt["time"])
+                                # Print current tool number
+                                f_new.write(dprnt_tool(line))
+                                # Print current feedrate
+                                f_new.write(dprnt["feedrate"])
                                 found_cnt += 1
+
                             # End of program
                             elif 'M30' in line:
-                                # Insert the text for each marked checkbox
-                                # Imprime fecha del proceso actual
-                                f_new.write("\nDPRNT[FECHA*(AAMMDD):*#3011]\n")
-                                # Imprime hora del proceso actual
-                                f_new.write("\nDPRNT[HORA*(HHMMSS):*#3021]\n")
-                                # Imprime nivel de enfriador actual
-                                f_new.write("\n" + checkbox_txt[2] + "\n")
-                                #if checkbox[1]:
-                                #    f_new.write("\n" + checkbox_txt[1] + "\n")
+                                # Print current date
+                                f_new.write(dprnt["date"])
+                                # Print current time
+                                f_new.write(dprnt["time"])
+                                # Print current coolant level
+                                f_new.write(dprnt["coolant"])
+                                # Print current feedrate
+                                f_new.write(dprnt["feedrate"])
                                 found_cnt += 1
+
                             line_cnt += 1
+
                         # Rename the new file as the original file, add _prev to the original file's name
                         os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.txt")
                         os.rename(newfile, ncprogram)
