@@ -34,6 +34,8 @@ layout = [[sg.Text("Selecciona un archivo (.nc/.txt): ")],
 #Insert GUI elements into window
 window = sg.Window("DPRNTer para archivos .nc o .txt", layout, size = (650, 150))
 
+# HAAS Macrovariables table: https://www.haascnc.com/service/online-operator-s-manuals/mill-operator-s-manual/mill---macros.html
+
 # Dictionary that stores the text to be used in each DPRNT statement.
 dprnt = {
             "date":    "\nDPRNT[DATE*(AAMMDD):*#3011]\n",
@@ -60,21 +62,25 @@ def dprnt_tool(line):
 while True:
     # Get variables from the GUI elements
     event, values = window.read()
+
     if (event == sg.WIN_CLOSED or event == "Cerrar"):
         break
+
     elif event == "Procesar":
         event = ""
+
         # Store the file path
         ncprogram = values["-IN-"]
-        # HAAS Macrovariables table: https://www.haascnc.com/service/online-operator-s-manuals/mill-operator-s-manual/mill---macros.html
-        checkbox_txt = ["DPRNT[HORA*(HHMMSS):*#3021[60]]", "DPRNT[ESTIMATED*FEEDRATE:*#5081[60]]", "DPRNT[COOLANT*LEVEL:*#13013[60]]"]
+
         # No file was selected
         if (ncprogram == ""):
             sg.Popup("Por favor, seleccione un archivo.", title = "Error")
+
         else:
             # Is file .nc or .txt?
             if ncprogram[-3:]==".nc" or ncprogram[-4:]==".txt":
                 line_cnt = 0
+                
                 found_cnt = 0
 
 # --------------------------------WORK WITH NC FILE------------------------------------------
