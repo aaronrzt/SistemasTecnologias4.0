@@ -7,7 +7,6 @@ import os
 TO DO:
 - If the machine stops reading the .nc program at the last %, make the last DPRNT be inserted after M30.
 -- If the above is true, add a flag that turns on after adding the first % DPRNT so that it isn't added again.
--- Turn the flag back off after renaming the files.
 """
 
 
