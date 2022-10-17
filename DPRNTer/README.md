@@ -1,7 +1,7 @@
 ## DPRNTer.py
 <p align = "center">
 
-![DPRNTer GUI v1][gui-v1-link]
+![DPRNTer GUI v2][gui-v2-link]
 
 </p>
 
@@ -53,6 +53,7 @@ ser revisado en el repositorio.
 -->
 [gui-draft-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/GUIDraft.png
 [gui-v1-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/GUIv1.png
+[gui-v2-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/GUIv2.png
 [python-link]: https://www.python.org/
 [python-badge]: https://img.shields.io/badge/python-v3.8-blue
 [pysimplegui-link]: https://www.pysimplegui.org/en/latest/
