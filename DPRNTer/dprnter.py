@@ -4,13 +4,6 @@ import PySimpleGUI as sg
 import os
 
 """
-TO DO:
-- If the machine stops reading the .nc program at the last %, make the last DPRNT be inserted after M30.
--- If the above is true, add a flag that turns on after adding the first % DPRNT so that it isn't added again.
-"""
-
-
-"""
 Select the GUI theme:
 LightYellow     Reddit          LightGreen3         LightBrown      Dark
 DarkBlue15      Black           LightGreen4         DarkPurple      BrownBlue
