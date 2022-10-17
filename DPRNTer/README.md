@@ -54,11 +54,11 @@ ser revisado en el repositorio.
 [gui-v1-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/GUIv1.png
 [gui-v2-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/GUIv2.png
 [python-link]: https://www.python.org/
-[python-badge]: https://img.shields.io/badge/python-v3.8-blue
+[python-badge]: https://img.shields.io/badge/Python-v3.8-blue
 [pysimplegui-link]: https://www.pysimplegui.org/en/latest/
 [pysimplegui-badge]: https://img.shields.io/badge/PySimpleGUI-v4.60-blue
 [windows-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/DPRNTer/processnc.exe
 [unix-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/DPRNTer/processnc
 [laser-link]: https://www.lasermanufactura.com/
-[pyinstaller-badge]: https://img.shields.io/badge/pyinstaller-5.4.1-blue
+[pyinstaller-badge]: https://img.shields.io/badge/PyInstaller-v5.4.1-blue
 [pyinstaller-link]: https://pyinstaller.org/en/stable/

@@ -37,10 +37,10 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 -->
 
 [python-link]: https://www.python.org/
-[python-badge]: https://img.shields.io/badge/python-v3.8-blue
+[python-badge]: https://img.shields.io/badge/Python-v3.8-blue
 [pysimplegui-link]: https://www.pysimplegui.org/en/latest/
 [pysimplegui-badge]: https://img.shields.io/badge/PySimpleGUI-v4.60-blue
 [laser-link]: https://www.lasermanufactura.com/
 [project-pic]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/InfoCycle.png
-[pyinstaller-badge]: https://img.shields.io/badge/pyinstaller-5.4.1-blue
+[pyinstaller-badge]: https://img.shields.io/badge/PyInstaller-v5.4.1-blue
 [pyinstaller-link]: https://pyinstaller.org/en/stable/
