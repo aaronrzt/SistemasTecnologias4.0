@@ -28,7 +28,7 @@ las máquinas presentes en la planta de Laser & Manufacturing, nuestro socio for
 * [![PyInstaller][pyinstaller-badge]][pyinstaller-link]
 
 ### Setup
-Descarga en tu equipo la aplicación para [Windows (64-bt)][windows-app-link] o
+Descarga en tu equipo la aplicación para [Windows (64-bit)][windows-app-link] o
 [Unix (64-bit)][unix-app-link]. Para ejecutarla, da doble click (Nota 1).
 
 ### Instrucciones de uso
