@@ -126,7 +126,8 @@ while True:
                             found_cnt += 1
 
                         line_cnt += 1
-
+                    f_old.close()
+                    f_new.close()
                     # Rename the new file as the original file, add _prev to the original file's name
                     if ncprogram[-3:]==".nc":
                         os.rename(ncprogram, ncprogram.replace('.nc', '') + "_prev.nc")
