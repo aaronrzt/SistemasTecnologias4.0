@@ -33,10 +33,8 @@ Descarga en tu equipo la aplicación para [Windows (64-bt)][windows-app-link] o
 ### Instrucciones de uso
 1. Abre la app
 2. Selecciona el archivo a procesar (.nc o .txt) dando click en "Buscar".
-3. Selecciona las variables a extraer del proceso de maquinado marcando las casillas
-correspondientes (todas están habilitadas por default).
-4. Da clik en "Procesar"
-5. Repetir a partir del paso 2 por cada archivo que sea necesario procesar.
+3. Da clik en "Procesar"
+4. Repetir a partir del paso 2 por cada archivo que sea necesario procesar.
 
 
 ### Notas
