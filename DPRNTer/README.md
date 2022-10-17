@@ -57,8 +57,8 @@ ser revisado en el repositorio.
 [python-badge]: https://img.shields.io/badge/Python-v3.8-blue
 [pysimplegui-link]: https://www.pysimplegui.org/en/latest/
 [pysimplegui-badge]: https://img.shields.io/badge/PySimpleGUI-v4.60-blue
-[windows-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/DPRNTer/processnc.exe
-[unix-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/DPRNTer/processnc
+[windows-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/DPRNTer/Releases/dprnter_win64.exe
+[unix-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/DPRNTer/Releases/dprnter_ux64
 [laser-link]: https://www.lasermanufactura.com/
 [pyinstaller-badge]: https://img.shields.io/badge/PyInstaller-v5.4.1-blue
 [pyinstaller-link]: https://pyinstaller.org/en/stable/
