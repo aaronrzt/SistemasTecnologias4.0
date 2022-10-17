@@ -26,6 +26,7 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 ### Herramientas
 * [![Python][python-badge]][python-link]
 * [![PySimpleGUI][pysimplegui-badge]][pysimplegui-link]
+* [![PyInstaller][pyinstaller-badge]][pyinstaller-link]
 
 
 <p align = "">(<a href = "#readme-top">Regresar al inicio)</p>
@@ -41,3 +42,5 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 [pysimplegui-badge]: https://img.shields.io/badge/PySimpleGUI-v4.60-blue
 [laser-link]: https://www.lasermanufactura.com/
 [project-pic]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/InfoCycle.png
+[pyinstaller-badge]: https://img.shields.io/badge/pyinstaller-5.4.1-blue
+[pyinstaller-link]: https://pyinstaller.org/en/stable/

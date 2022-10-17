@@ -25,6 +25,7 @@ las máquinas presentes en la planta de Laser & Manufacturing, nuestro socio for
 ### Herramientas
 * [![Python][python-badge]][python-link]
 * [![PySimpleGUI][pysimplegui-badge]][pysimplegui-link]
+* [![PyInstaller][pyinstaller-badge]][pyinstaller-link]
 
 ### Setup
 Descarga en tu equipo la aplicación para [Windows (64-bt)][windows-app-link] o
@@ -59,3 +60,5 @@ ser revisado en el repositorio.
 [windows-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/DPRNTer/processnc.exe
 [unix-app-link]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/DPRNTer/processnc
 [laser-link]: https://www.lasermanufactura.com/
+[pyinstaller-badge]: https://img.shields.io/badge/pyinstaller-5.4.1-blue
+[pyinstaller-link]: https://pyinstaller.org/en/stable/
