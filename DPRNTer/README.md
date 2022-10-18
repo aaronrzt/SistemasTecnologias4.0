@@ -44,7 +44,7 @@ en Mostrar más->Correr de todas formas. El script es completamente seguro, pero
 momento de desarrollo no se cuenta con una certificación de seguridad. El script puede
 ser revisado en el repositorio.
 
-<p align = "">(<a href = "#readme-top">Regresar al inicio)</p>
+<p align = ""><a href = "#readme-top">(Regresar al inicio)</p>
 
 <!--
 #### Primer prototipo de la interfaz
