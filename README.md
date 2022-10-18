@@ -29,7 +29,7 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 * [![PyInstaller][pyinstaller-badge]][pyinstaller-link]
 
 
-<p align = "">(<a href = "#readme-top">Regresar al inicio</p>)
+<p align = "">(<a href = "#readme-top">"Regresar al inicio)"</p>
 
 <!--
 #### Primer prototipo de la interfaz
