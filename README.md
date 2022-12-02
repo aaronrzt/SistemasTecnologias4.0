@@ -48,5 +48,5 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 [pyinstaller-link]: https://pyinstaller.org/en/stable/
 [arduino-link]: https://www.arduino.cc/en/software
 [arduino-badge]: https://img.shields.io/badge/Arduino%20IDE-1.8.19-blue
-[nodered-link]: (https://nodered.org/
+[nodered-link]: https://nodered.org/
 [nodered-badge]: https://img.shields.io/badge/NodeRED-3.0.3-blue
