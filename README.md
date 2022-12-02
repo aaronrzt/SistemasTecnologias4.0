@@ -27,6 +27,7 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 * [![Python][python-badge]][python-link]
 * [![PySimpleGUI][pysimplegui-badge]][pysimplegui-link]
 * [![PyInstaller][pyinstaller-badge]][pyinstaller-link]
+* [![Arduino IDE][arduino-badge]][arduino-link]
 
 
 <p align = ""><a href = "#readme-top">(Regresar al inicio)</p>
@@ -44,3 +45,5 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 [project-pic]: https://github.com/aaronrt21/SistemasTecnologias4.0/blob/main/Images/InfoCycle.png
 [pyinstaller-badge]: https://img.shields.io/badge/PyInstaller-v5.4.1-blue
 [pyinstaller-link]: https://pyinstaller.org/en/stable/
+[arduino-link]: https://www.arduino.cc/en/software
+[arduino-badge]: https://img.shields.io/badge/Arduino%20IDE-1.8.19-blue
