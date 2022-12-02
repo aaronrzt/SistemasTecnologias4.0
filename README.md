@@ -28,6 +28,7 @@ las instrucciones DPRNT que se mencionan en el apartado anterior (DPRNTer.py).
 * [![PySimpleGUI][pysimplegui-badge]][pysimplegui-link]
 * [![PyInstaller][pyinstaller-badge]][pyinstaller-link]
 * [![Arduino IDE][arduino-badge]][arduino-link]
+* [![NodeRED][nodered-badge]][nodered-link]
 
 
 <p align = ""><a href = "#readme-top">(Regresar al inicio)</p>
